@@ -1,0 +1,28 @@
+{
+  "name": "pasasbot-rework",
+  "version": "2.0.0",
+  "description": "A reworked version of the original PasasBot",
+  "main": "src/main.js",
+  "scripts": {
+    "test": "xdnicememe4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pasas1345/PasasBot-rework.git"
+  },
+  "author": "Pasas1345",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Pasas1345/PasasBot-rework/issues"
+  },
+  "homepage": "https://github.com/Pasas1345/PasasBot-rework#readme",
+  "dependencies": {
+    "bufferutil": "^4.0.1",
+    "discord.js": "^12.2.0",
+    "eslint": "^7.1.0",
+    "mongoose": "^5.9.21",
+    "opusscript": "0.0.7",
+    "utf-8-validate": "^5.0.2",
+    "ytdl-core": "^2.1.7"
+  }
+}
