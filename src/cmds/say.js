@@ -20,7 +20,7 @@ module.exports = {
         if(msg.deletable) await msg.delete();
 
         await msg.channel.send(msg_to_say);
-        await logs.fullLog(`Pasas1345 used me to say: "${msg_to_say}" in ${msg.guild.name}`);
+        await logs.normalLog(`Pasas1345 used me to say: "${msg_to_say}" in ${msg.guild.name}`);
 
     },
 };

@@ -138,7 +138,7 @@ exports.queue = queue;
 module.exports = {
     name: "insert_file_name",
 	description: "insert_description_here",
-    execute(args, msg) {
+    async execute(args, msg) {
 		// Insert code here.
     },
 };
