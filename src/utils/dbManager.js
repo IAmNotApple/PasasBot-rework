@@ -3,6 +3,7 @@ const moneyJSON = require('../../database/money.json');
 // Schemas go here
 const Money = require(`../models/money.js`);
 const Inventory = require('../models/inventory');
+const Safe = require('../models/safe');
 // Dependencies!
 const fs = require('fs');
 const logs = require('../utils/logging');
@@ -125,6 +126,167 @@ module.exports = {
                 m = money.balance;
             }
             money = m;
+        });
+    },
+    /*---------------*
+     * Safe Database *
+     *---------------*/
+    /**
+     * Initializes the safe database of a user
+     * @param {User} user 
+     */
+    initSafe: function(user) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: 0,
+                    safeMaxBalance: 5000,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+        });
+    },
+    /**
+     * Adds money to the user's safe.
+     * @param {User} user 
+     * @param {Number} balance 
+     */
+    addSafeMoney: function(user, balance) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: balance,
+                    safeMaxBalance: 5000,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeBalance += balance;
+                safe.save().catch(err => console.log(err));
+            }
+        });
+    },
+    /**
+     * Subtracts money from the user's safe.
+     * @param {User} user 
+     * @param {Number} balance 
+     */
+    subtractSafeMoney: function(user, balance) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: 0,
+                    safeMaxBalance: 5000,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeBalance -= balance;
+                safe.save().catch(err => console.log(err));
+            }
+        });
+
+    },
+    /**
+     * Sets money in the user's safe.
+     * @param {User} user 
+     * @param {Number} balance 
+     */
+    setSafeMoney: function(user, balance) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: balance,
+                    safeMaxBalance: 5000,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeBalance = balance;
+                safe.save().catch(err => console.log(err));
+            }
+        });
+    },
+    /**
+     * Resets money in the user's safe.
+     * @param {User} user  
+     */
+    resetSafeMoney: function(user) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: 0,
+                    safeMaxBalance: 5000,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeBalance = 0;
+                safe.save().catch(err => console.log(err));
+            }
+        });
+    },
+
+    /**
+     * Adds max money to the user's safe.
+     * @param {User} user 
+     * @param {Number} balance 
+     */
+    addSafeMaxMoney: function(user, balance) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: 0,
+                    safeMaxBalance: balance,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeMaxBalance += balance;
+                safe.save().catch(err => console.log(err));
+            }
+        });
+    },
+    
+    /**
+     * Subtracts max money to the user's safe.
+     * @param {User} user 
+     * @param {Number} balance 
+     */
+    subtractSafeMaxMoney: function(user, balance) {
+        Safe.findOne({ userID: user }, (err, safe) => {
+            if (err) logs.errorLog(`Something wrong happened in finding database in MongoDB:\n\`\`\`${err}\`\`\``);
+            if (!safe) {
+                const newSafe = new Safe({
+                    userID: user,
+                    safeBalance: 0,
+                    safeMaxBalance: 5000 - balance,
+                });
+
+                newSafe.save().catch(err => console.log(err));
+            }
+            else {
+                safe.safeMaxBalance -= balance;
+                safe.save().catch(err => console.log(err));
+            }
         });
     },
 
@@ -258,5 +420,6 @@ module.exports = {
                 inventory.save().catch(err => console.log(err));
             }
         });
+
     },
 };

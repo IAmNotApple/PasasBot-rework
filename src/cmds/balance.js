@@ -32,7 +32,7 @@ module.exports = {
                 [
                     {
                         name: `Amount of coins:`,
-                        value: pbMath.moneyToCoins(uMoney),
+                        value: `${pbMath.moneyToCoins(uMoney)} coins`,
                     },
                 ],
             };

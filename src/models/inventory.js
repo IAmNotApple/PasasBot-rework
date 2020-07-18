@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
  * 0 : White Crystal
  * 1 : Blue Crystal
  * 2 : Purple Crystal
- * 3 : Orange Crystals
+ * 3 : Orange Crystal
  */
 
 const inventorySchema = new mongoose.Schema({

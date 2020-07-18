@@ -22,7 +22,7 @@ module.exports = {
         let silver = Math.floor((m / 100) % 100);
         let gold = Math.floor((m / 100 / 100));
         
-        return `<:goldcoin:728975002950434906> **${gold}**, <:silvercoin:728975002698907669> **${silver}**, <:coppercoin:728975002174488598> **${copper}** coins.`;
+        return `<:goldcoin:728975002950434906> **${gold}**, <:silvercoin:728975002698907669> **${silver}**, <:coppercoin:728975002174488598> **${copper}**`;
     },
 
     /**
@@ -38,4 +38,27 @@ module.exports = {
         else
             return false;
     }, 
+    /**
+     * Parses the coin type to raw money
+     * @param {String} coinType - Either gold, silver, or copper
+     * @param {number} money - The coin
+     * @returns {number} - Returns the value in copper
+     */
+    parseCoinType: function(coin, coinType) {
+        let c = parseInt(coin);
+        switch (coinType) {
+            case 'gold' || 'g':
+                return c * 10000;
+            break;
+            case 'silver' || 's':
+                return c * 100;
+            break;
+            case 'copper' || 'c':
+                return c;
+            break;
+            default:
+                return c;
+            break;
+        }
+    },
 };

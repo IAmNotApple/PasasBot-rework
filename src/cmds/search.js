@@ -9,6 +9,8 @@ const pbMath = require('../utils/pbMath');
 module.exports = {
     name: "search",
     description: "Search for items and money.",
+    cooldown: 15,
+    cdResponse: `Don't oversearch, wait for a while so they can restock on their things.`,
     /**
      * @param {*} args 
      * @param {Message} msg 
@@ -47,7 +49,6 @@ module.exports = {
                 dbManager.addItem(msg.author.id, 3, 1);
                 item_data = `1 Orange Crystal`;
             }
-            console.log(itemRandomizer);
             items_taken = true;
         }
         // Money part:
@@ -59,13 +60,13 @@ module.exports = {
         }
         
         if (items_taken && money_taken) {
-            return msg.channel.send(`You have founed ${item_data} and ${pbMath.moneyToCoins(money_data)}`);
+            return msg.channel.send(`You have founed ${item_data} and ${pbMath.moneyToCoins(money_data)} coins.`);
         }
         else if (items_taken) {
             return msg.channel.send(`You have found ${item_data}.`);
         }
         else if (money_taken) {
-            return msg.channel.send(`You have found ${pbMath.moneyToCoins(money_data)}.`);
+            return msg.channel.send(`You have found ${pbMath.moneyToCoins(money_data)} coins.`);
         }
         
         msg.channel.send(`Unfortunately, during the search, you didn't find anything at all.`);
