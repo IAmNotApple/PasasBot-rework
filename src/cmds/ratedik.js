@@ -20,7 +20,7 @@ module.exports = {
 			`Big.\n:face_with_raised_eyebrow: Quite a good shape you have there.`,
 			`:open_mouth: Oooooh.\n:smirk: Daddy!`,
 			`:stuck_out_tongue_winking_eye: Ohhhh boi.\n:smiling_imp: Give it to me Daddy!`,
-			`:scream: Ultimate Mega Large PP.\n:thom: :nat: :lance: The Council lets you ascend to Ultimate Sugar Daddy!:boom: :boom: `
+			`:scream: Ultimate Mega Large PP.\n<:thom:620247012524163072> <:nat:620243040615006218> <:lance:620057658887634947> The Council lets you ascend to Ultimate Sugar Daddy!:boom: :boom: `
 		];
 
         let rate = Math.floor(Math.random() * 11);
